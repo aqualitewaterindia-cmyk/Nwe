@@ -9,43 +9,33 @@ export const BottomNav: React.FC<{
   setScreen: (s: Screen) => void;
   isDarkMode: boolean;
 }> = ({ lang, currentScreen, setScreen, isDarkMode }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  
   const navItems = [
-    { id: Screen.Home, label: t.home, icon: 'Phone' },
-    { id: Screen.CitySelection, label: t.change_city, icon: 'MapPin' },
-    { id: Screen.Settings, label: t.profile, icon: 'Settings' },
+    { id: Screen.Home, label: t.home, icon: 'Navigation' },
+    { id: Screen.Consult, label: t.consult, icon: 'UserRound' },
+    { id: Screen.Call, label: t.call, icon: 'Phone' },
+    { id: Screen.More, label: t.more, icon: 'GanttChartSquare' },
   ];
 
   return (
-    <nav className={`fixed bottom-0 left-0 right-0 z-50 flex justify-around border-t px-2 pb-6 pt-3 safari-bottom-safe ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+    <nav className={`fixed bottom-0 left-0 right-0 z-50 flex justify-around border-t px-2 pb-6 pt-3 shadow-[0_-4px_10px_rgba(0,0,0,0.1)] ${isDarkMode ? 'bg-[#0D1B2A] border-slate-700' : 'bg-[#1A237E] border-slate-800'}`}>
       {navItems.map((item) => (
         <button
           key={item.id}
           onClick={() => setScreen(item.id)}
           className={`flex flex-col items-center gap-1 transition-all ${
             currentScreen === item.id 
-              ? 'text-orange-600' 
-              : isDarkMode ? 'text-slate-400' : 'text-slate-500'
+              ? 'text-white scale-110' 
+              : 'text-white/60'
           }`}
         >
-          {getIcon(item.icon, 20)}
-          <span className="text-[10px] font-bold text-center leading-tight max-w-[64px] truncate">
+          {getIcon(item.icon, 24)}
+          <span className="text-[10px] font-bold tracking-widest uppercase text-center leading-tight">
             {item.label}
           </span>
         </button>
       ))}
     </nav>
-  );
-};
-
-export const SOSButton: React.FC<{ lang: Language }> = ({ lang }) => {
-  const t = TRANSLATIONS[lang];
-  return (
-    <button 
-      className="fixed bottom-24 right-4 z-40 flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-200 active:scale-90 transition-transform"
-      onClick={() => window.location.href = 'tel:112'}
-    >
-      <span className="text-sm font-bold">{t.sos_btn}</span>
-    </button>
   );
 };
