@@ -1,0 +1,8 @@
+{
+  "name": "Bharat Helpline Number - India Emergency & Public Services",
+  "description": "A comprehensive, high-contrast, multi-lingual emergency and public service portal for India with AI-powered consultation.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
